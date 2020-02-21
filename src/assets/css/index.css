@@ -1,0 +1,39 @@
+/* 主题颜色 */
+:root {
+    --main-dark: #333333;
+    --main-gary: #999999;
+    --main-blue: #79A0CA;
+    --main-red: #D55959;
+    --main-yellow: #DAAD68;
+    --main-green: #00BFA5;
+    --main-white: #F5F5F5
+}
+
+/* 字体 */
+@font-face {
+    font-family: pfj;
+    src: url("../font/苹方简体.otf");
+}
+
+/* 界面默认背景颜色 */
+html {
+    height: 100%;
+    width: 100%;
+
+    font-family: "pfj";
+    color: white;
+
+    background-color: var(--main-blue);
+}
+
+/* 毛玻璃特效 */
+.glass {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+/* 充填顶部或底部 */
+.fill {
+    height: 50px;
+}
