@@ -40,7 +40,8 @@
         },
         methods: {
             link() {
-                console.log("link:" + this.to)
+                console.log("link:" + this.to);
+                this.$router.push(this.to);
             }
         }
     }

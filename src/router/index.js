@@ -7,14 +7,29 @@ const Login = () => import('../views/Login/Login');
 const Index = () => import('../views/Index/Index');
 
 import Schedule from '../views/Index/Schedule/Schedule'
-import Extend from '../views/Index/Extend/Extend'
 import Profile from '../views/Index/Profile/Profile'
+import Extend from '../views/Index/Extend/Extend'
+
+import ExtendMenu from "../views/Index/Extend/ExtendMenu/ExtendMenu";
+import ExamScore from "../views/Index/Extend/ExtendFunction/ExamScore/ExamScore";
+
+/*扩展功能子页面*/
+const extendChildren = [
+  {
+    path: '',
+    component: ExtendMenu
+  },
+  {
+    path: 'examScore',
+    component: ExamScore
+  }
+];
 
 /*主页面子路由*/
 const indexChildren = [
   {
-    path: '/',
-    component: Profile
+    path: '',
+    redirect: '/index/schedule'
   },
   {
     path: 'schedule',
@@ -22,7 +37,8 @@ const indexChildren = [
   },
   {
     path: 'extend',
-    component: Extend
+    component: Extend,
+    children: extendChildren
   },
   {
     path: 'profile',
@@ -36,6 +52,7 @@ const routes = [
     //配置默认
     path: '',
     redirect: '/index'
+
   },
   {
     //配置主页面

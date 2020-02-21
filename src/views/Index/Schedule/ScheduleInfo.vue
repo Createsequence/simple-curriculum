@@ -35,7 +35,9 @@
     export default {
         name: "ScheduleInfo",
         props: {
-            course: defaultCourse
+            course: {
+                default: defaultCourse
+            }
         },
         data() {
             return {
