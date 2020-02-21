@@ -15,13 +15,14 @@
     src: url("../font/苹方简体.otf");
 }
 
-/* 界面默认背景颜色 */
+/* 界面默认背景颜色和字体 */
 html {
     height: 100%;
     width: 100%;
 
     font-family: "pfj";
     color: white;
+    font-weight: bold;
 
     background-color: var(--main-blue);
 }
@@ -30,10 +31,14 @@ html {
 .glass {
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(121, 160, 202, 0.9);
+
+    /*background-color: rgba(121,160,202,0.9);*/
 }
+
 
 /* 充填顶部或底部 */
 .fill {
     height: 50px;
+    border-bottom: white ridge 1px;
 }

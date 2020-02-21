@@ -14,7 +14,7 @@ import Profile from '../views/Index/Profile/Profile'
 const indexChildren = [
   {
     path: '/',
-    component: Schedule
+    component: Profile
   },
   {
     path: 'schedule',

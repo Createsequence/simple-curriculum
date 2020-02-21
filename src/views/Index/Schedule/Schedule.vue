@@ -17,10 +17,9 @@
                         @click="showInfo(course)"
                 >
 
-
                     <!--不显示空课-->
                     <span v-if="!course.isEmptyCourse && course.children == null">
-                        {{ course.courseName }}@{{ course.courseClassroom }}
+                        {{ course.courseName + '@' + course.courseClassroom }}
                     </span>
 
                     <!--重课只显示第一节-->
@@ -61,12 +60,16 @@
             }
         },
         methods: {
+            /*判断是否重课*/
             hasChild(course) {
                 return course.children != null;
             },
+            /*判断是否空课*/
             showInfo(course) {
-                this.courseInfo = course;
-                this.show = true;
+                if (!course.isEmptyCourse){
+                    this.courseInfo = course;
+                    this.show = true;
+                }
             }
         }
     }
@@ -89,7 +92,6 @@
     /*日期*/
     .days {
         padding: 3px 0px;
-        border-top: white ridge 1px;
     }
     /*课表*/
     .coursesBox {

@@ -54,7 +54,8 @@
     .login-input {
         width: 320px;
         height: 40px;
-        background-color: var(--main-white);
+
+        background: rgba(245, 245, 245, 0.9);
         border: none;
         outline: none;
 
@@ -78,7 +79,7 @@
     .login-btn button {
         width: 330px;
         height: 40px;
-        background-color: var(--main-white);
+        background: rgba(245, 245, 245, 0.9);
 
         border: none;
         border-radius: 7px;
