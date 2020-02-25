@@ -27,9 +27,11 @@
 </template>
 
 <script>
-    import scoreData from "../../scoreData";
     import ExamScoreInfo from "./ExamScoreInfo";
+    import storage from "../../../../../model/storage";
+
     import { Toast } from 'vant'
+    import {requestScore} from "../../../../../network/request";
 
     export default {
         name: "ExamScore",
@@ -45,9 +47,9 @@
                 scoreInfo: {},
                 years: [{text:'查询全部成绩', value: 0}],
                 //用于展示的数据
-                scores: scoreData,
+                scores: {},
                 //源数据
-                originScores: scoreData
+                originScores: {}
             }
         },
         methods: {
@@ -92,6 +94,26 @@
 
                 i++;
             }
+        },
+        mounted() {
+            //判断成绩是否缓存
+            if (!storage.contains("scores")) {
+                //无缓存时查询
+                requestScore()
+                    .then(req => {
+                        console.log("成绩未缓存，已请求成功");
+                        this.originScores = req;
+                        this.scores = req;
+                        //将请求数据存入缓存
+                        storage.set("scores",req);
+                    });
+            } else {
+                //否则直接调用缓存数据
+                console.log("已有缓存数据，直接从缓存中获取成绩");
+                this.originScores = storage.get("scores");
+                this.scores = storage.get("scores");
+            }
+
         }
     }
 </script>

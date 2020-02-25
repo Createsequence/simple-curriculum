@@ -43,8 +43,9 @@
 </template>
 
 <script>
-    import scheduleData from './scheduleData';
     import ScheduleInfo from "./ScheduleInfo";
+    import storage from "../../../model/storage";
+    import { requestSchedule } from '../../../network/request';
 
     export default {
         name: "Schedule",
@@ -55,7 +56,7 @@
             return {
                 days: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'],
                 show: false,
-                schedules: scheduleData,
+                schedules: [],
                 courseInfo: {}
             }
         },
@@ -70,6 +71,23 @@
                     this.courseInfo = course;
                     this.show = true;
                 }
+            }
+        },
+        mounted() {
+            //判断课表是否缓存
+            if (!storage.contains("schedules")) {
+                //无缓存时查询
+                requestSchedule()
+                    .then(req => {
+                        console.log("课表未缓存，已请求成功");
+                        this.schedules = req;
+                        //缓存课表
+                        storage.set("schedules", req);
+                    });
+            } else {
+                //否则直接调用缓存数据
+                console.log("已有缓存数据，直接从缓存中获取课表");
+                this.schedules = storage.get("schedules");
             }
         }
     }

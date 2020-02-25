@@ -6,34 +6,62 @@
             简单课程表
         </div>
 
-        <form>
+        <div>
             <!--输入框-->
-            <input type="text" class="login-input login-input-top" placeholder="学号">
+            <input type="text" class="login-input login-input-top" placeholder="学号" v-model="userAccount">
             <br>
-            <input type="password" class="login-input login-input-bottom" placeholder="密码">
+            <input type="password" class="login-input login-input-bottom" placeholder="密码" v-model="userPassword">
 
             <!--登录按钮-->
             <div class="login-btn">
-                <button type="submit">
+                <button @click="submit()">
                     登录
                 </button>
                 <div class="login-tip">
                     免责声明
                 </div>
             </div>
-        </form>
+        </div>
 
     </div>
 </template>
 
 <script>
+    import { requestLogin } from '../../network/request';
+    import storage from "../../model/storage";
+
     export default {
         name: "Login",
         data() {
             return {
-                number: '',
-                password: ''
+                userAccount: '',
+                userPassword: ''
             };
+        },
+        methods: {
+            //登录
+            submit() {
+                requestLogin({
+                    params: {
+                        userAccount: this.userAccount,
+                        userPassword: this.userPassword
+                    }
+                }).then(req => {
+                    //成功登录就跳转
+                    this.intoIndex();
+                })
+            },
+            intoIndex() {
+                this.$router.push("/index")
+            }
+        }, created() {
+            //如果已经登录过，就展示缓存的账号密码
+            if (storage.contains("user")){
+                console.log("已有用户数据，从缓存中获取");
+                let user = storage.get("user");
+                this.userAccount = user.userAccount;
+                this.userPassword = user.userPassword;
+            }
         }
     }
 </script>

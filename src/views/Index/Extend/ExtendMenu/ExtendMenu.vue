@@ -7,7 +7,7 @@
         </extend-menu-list>
 
         <extend-menu-list title="考试工具">
-            <extend-menu-list-item fa-icon="fa-home" text="考场查询" to="www.baidu.com"/>
+            <extend-menu-list-item fa-icon="fa-home" text="考场查询"/>
         </extend-menu-list>
     </div>
 </template>

@@ -5,8 +5,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    studentUser: {},
-    cookie: ''
   },
   mutations: {
   },

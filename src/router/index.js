@@ -51,7 +51,7 @@ const routes = [
   {
     //配置默认
     path: '',
-    redirect: '/index'
+    redirect: '/login'
 
   },
   {
