@@ -57,10 +57,17 @@
         }, created() {
             //如果已经登录过，就展示缓存的账号密码
             if (storage.contains("user")){
-                console.log("已有用户数据，从缓存中获取");
                 let user = storage.get("user");
-                this.userAccount = user.userAccount;
-                this.userPassword = user.userPassword;
+                console.log("已有用户数据，从缓存中获取");
+                requestLogin({
+                    params: {
+                        userAccount: user.userAccount,
+                        userPassword: user.userPassword
+                    }
+                }).then(req => {
+                    //成功登录就跳转
+                    this.intoIndex();
+                });
             }
         }
     }

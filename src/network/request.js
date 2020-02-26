@@ -8,7 +8,7 @@ import storage from "../model/storage";
 //引入axios
 import axios from 'axios';
 // 设置axios的基本配置
-axios.defaults.baseURL = 'http://localhost:8080/';
+axios.defaults.baseURL = 'http://xiajibagao.top:8080/curriculum/';
 axios.defaults.timeout = 3000;
 
 /*
