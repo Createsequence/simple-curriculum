@@ -27,7 +27,7 @@
 </template>
 
 <script>
-    import { requestLogin } from '../../network/request';
+    import { requestLogin,isVisitorLogin } from '../../network/request';
     import storage from "../../model/storage";
 
     export default {
@@ -41,6 +41,12 @@
         methods: {
             //登录
             submit() {
+                //判断是否为游客登录
+                if (isVisitorLogin(this.userAccount)) {
+                    this.intoIndex();
+                    return;
+                }
+
                 requestLogin({
                     params: {
                         userAccount: this.userAccount,
@@ -49,7 +55,7 @@
                 }).then(req => {
                     //成功登录就跳转
                     this.intoIndex();
-                })
+                });
             },
             intoIndex() {
                 this.$router.push("/index")

@@ -8,8 +8,11 @@ import storage from "../model/storage";
 //引入axios
 import axios from 'axios';
 // 设置axios的基本配置
-axios.defaults.baseURL = 'http://xiajibagao.top:8080/curriculum/';
+axios.defaults.baseURL = 'http://api.xiajibagao.top/curriculum/';
 axios.defaults.timeout = 3000;
+
+//引入模拟数据
+import {schedules, scores} from "../data";
 
 /*
 * 为Axios实例添加响应和请求拦截器
@@ -62,6 +65,33 @@ function interceptors(AxiosInstance){
         });
 }
 
+/**
+ * 检测是否为游客登录
+ * @param userAccount 登录账号
+ * @returns {boolean}
+ */
+export function isVisitorLogin(userAccount) {
+    if (userAccount != "123456") {
+        return false;
+    }
+
+    Toast.fail('你现在使用的是游客登录,请不要清除缓存');
+
+    //存入登录信息
+    let user = {
+        'userAccount': '123456',
+        'userPassword': '123456',
+        'userName': '游客'
+    };
+    storage.set("user", user);
+    //存入课表
+    storage.set("schedules", schedules);
+    //存入成绩
+    storage.set("scores", scores);
+
+    return true;
+}
+
 /*
 * 请求登录
 * */
@@ -107,9 +137,11 @@ export function requestLogin(config) {
     return axiosInstance(config);
 }
 
-/*
-* 获取课程表
-* */
+/**
+ * 获取课程表
+ * @param config
+ * @returns {AxiosPromise}
+ */
 export function requestSchedule(config) {
     //创建一个axios实例
     let axiosInstance = axios.create({
@@ -124,9 +156,11 @@ export function requestSchedule(config) {
     return axiosInstance(config);
 }
 
-/*
-* 获取课成绩
-* */
+/**
+ * 获取课成绩
+ * @param config
+ * @returns {AxiosPromise}
+ */
 export function requestScore(config) {
     //创建一个axios实例
     let axiosInstance = axios.create({
@@ -141,9 +175,11 @@ export function requestScore(config) {
     return axiosInstance(config);
 }
 
-/*
-* 获取考场
-* */
+/**
+ * 获取考场
+ * @param config
+ * @returns {AxiosPromise}
+ */
 export function requestExam(config) {
     //创建一个axios实例
     let axiosInstance = axios.create({

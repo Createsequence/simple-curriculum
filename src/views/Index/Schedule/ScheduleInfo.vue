@@ -30,7 +30,7 @@
         "courseTeacher": "沈燕讲师,赵军副教授,郭云力",
         "isEmptyCourse": false,
         "children": null
-    }
+    };
 
     export default {
         name: "ScheduleInfo",
